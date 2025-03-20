@@ -1,0 +1,41 @@
+name: "Mcmod Releaser"
+description: "Release a version to Mcmod"
+
+branding:
+  icon: "upload"
+  color: "red"
+
+inputs:
+  project_id:
+    description: "The Mcmod project ID"
+    required: true
+  game_versions:
+    description: "The game versions this mod is compatible with"
+    required: true
+  file:
+    description: "The files to upload"
+    required: true
+  loaders:
+    description: "The loaders this version is compatible with."
+    required: false
+    default: ""
+  platforms:
+    description: "The platforms this version is compatible with."
+    required: false
+    default: ""
+  loaders:
+    description: "The platforms this version is compatible with."
+    required: false
+    default: ""
+  tags:
+    description: "The tags to add to the version."
+    required: false
+    default: ""
+  upload_mode:
+    description: "How will be the version uploaded."
+    required: false
+    default: "replace"
+
+runs:
+  using: "node20"
+  main: "dist/index.js"
