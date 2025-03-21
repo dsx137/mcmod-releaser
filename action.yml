@@ -30,7 +30,7 @@ inputs:
   upload_mode:
     description: "How will be the version uploaded."
     required: false
-    default: "replace"
+    default: "unique"
 
 runs:
   using: "node20"
