@@ -2,6 +2,7 @@ import values from "./values";
 import fetch from "node-fetch";
 import FormData from "form-data";
 import * as fs from "fs";
+import * as cheerio from "cheerio";
 import * as core from "@actions/core";
 import * as nable from "@dsx137/nable";
 import * as defs from "./defs";
@@ -11,7 +12,7 @@ export async function login(account: defs.Account) {
   return core.group("🔑 Login", async () => {
     return await fetch("https://www.mcmod.cn/action/doLogin/", {
       method: "POST",
-      headers: { Referer: "https://www.mcmod.cn/login/" },
+      referrer: "https://www.mcmod.cn/login/",
       body: new URLSearchParams({ data: JSON.stringify(account) }),
     }).then(async (res) => {
       if (!res.ok) throw Error(`${res.status}: ${await res.text()}`);
@@ -23,6 +24,28 @@ export async function login(account: defs.Account) {
       if (!uuid) throw Error("Login failed!");
       core.info("Login success!");
       return uuid;
+    });
+  });
+}
+
+export async function findFile(uuid: string, projectId: string, file: string) {
+  return await core.group("🔍 Find file", async () => {
+    return await fetch(`https://modfile-dl.mcmod.cn/admin/${projectId}/`, {
+      referrer: "https://modfile-dl.mcmod.cn/admin/",
+      headers: { Cookie: `_uuid=${uuid}` },
+    }).then(async (res) => {
+      if (!res.ok) throw Error(`${res.status}: ${await res.text()}`);
+      core.info("Getting file list from html...");
+
+      const $ = cheerio.load(await res.text());
+      const files = $("span.file-name")
+        .map((i, it) => $(it).text())
+        .get();
+
+      const basename = path.basename(file);
+      const isExist = files.includes(basename);
+      isExist ? core.info("File exist!") : core.info("File not exist!");
+      return isExist;
     });
   });
 }
@@ -49,8 +72,8 @@ export async function upload(
 
     await fetch("https://modfile-dl.mcmod.cn/action/upload/", {
       method: "POST",
+      referrer: `https://modfile-dl.mcmod.cn/admin/${projectId}/`,
       headers: {
-        Referer: `https://modfile-dl.mcmod.cn/admin/${projectId}/`,
         Cookie: `_uuid=${uuid}`,
         ...form.getHeaders(),
       },
@@ -66,6 +89,12 @@ export async function upload(
 
 export async function main() {
   const uuid = await login(values.account);
+
+  if (values.upload_mode === "unique" && (await findFile(uuid, values.projectId, values.file))) {
+    core.notice("File already exists. Skipping...");
+    return;
+  }
+
   await upload(
     uuid,
     values.projectId,

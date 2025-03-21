@@ -33,7 +33,7 @@ export type Loader = keyof typeof LOADERS;
 export type Tag = keyof typeof TAGS;
 
 export enum UPLOAD_MODES {
-  // "unique",
+  "unique",
   "replace",
 }
 

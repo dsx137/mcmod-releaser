@@ -56,4 +56,5 @@ export default nable.lazy({
       .nLet((it) => nable.parseList(it))
       .map((it) => defs.validate(defs.TAGS, it)),
   file: () => core.getInput("file"),
+  upload_mode: () => core.getInput("upload_mode").nLet((it) => defs.validate(defs.UPLOAD_MODES, it)) as defs.UploadMode,
 });
