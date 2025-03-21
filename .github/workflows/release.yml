@@ -31,7 +31,7 @@ jobs:
       - name: Generate Changelog
         id: get_changelog
         run: |
-          tag="$(git --no-pager tag --sort=creatordate --merged ${{ github.ref_name }} | grep -v snapshot | tail -1)"
+          tag="$(git --no-pager tag --sort=creatordate --merged ${{ github.ref_name }} | grep -v nightly | tail -1)"
           limit="-1"
           if [ -n "$tag" ]; then
             limit="$tag..HEAD"
