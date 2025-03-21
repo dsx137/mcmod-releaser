@@ -24,6 +24,6 @@
       file: ./build/libs/mymod-all.jar
       platforms: java, bedrock
       loaders: forge, fabric, rift, liteloader, datapack, commandblock, overwrite, actionpack, sandbox, other, quilt, resourcepack, neoforge
-      tags: snapshot, beta, dev, lite, client, server,
+      tags: snapshot, beta, dev, lite, client, server
       upload_mode: replace # reserved for future use
 ```
