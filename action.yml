@@ -15,10 +15,6 @@ inputs:
   file:
     description: "The files to upload"
     required: true
-  loaders:
-    description: "The loaders this version is compatible with."
-    required: false
-    default: ""
   platforms:
     description: "The platforms this version is compatible with."
     required: false
