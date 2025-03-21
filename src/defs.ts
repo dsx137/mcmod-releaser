@@ -41,7 +41,8 @@ export type UploadMode = keyof typeof UPLOAD_MODES;
 export const STATES = {
   0: "success",
   101: "unauthorized",
-  logreg_username_empty: "Username cannot be empty",
+  112: "bad request",
+  logreg_username_empty: "username cannot be empty",
 };
 
 export function validate<T extends object>(def: T, it: string): keyof T {
