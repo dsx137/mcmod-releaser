@@ -34,7 +34,7 @@ export async function findFile(uuid: string, projectId: string, file: string) {
       referrer: "https://modfile-dl.mcmod.cn/admin/",
       headers: { Cookie: `_uuid=${uuid}` },
     }).then(async (res) => {
-      if (!res.ok) throw Error(`${res.status}: ${await res.text()}`);
+      if (!res.ok) throw Error(`${res.status}`);
       core.info("Getting file list from html...");
 
       const $ = cheerio.load(await res.text());
