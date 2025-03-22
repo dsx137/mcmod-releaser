@@ -9,8 +9,8 @@ inputs:
   project_id:
     description: "The Mcmod project ID"
     required: true
-  game_versions:
-    description: "The game versions this mod is compatible with"
+  game_version:
+    description: "The game version this mod is compatible with"
     required: true
   file:
     description: "The files to upload"

@@ -8,7 +8,7 @@
       MCMOD_ACCOUNT: username:password
   with:
       project_id: 7611
-      game_versions: 1.20.1
+      game_version: 1.20.1
       file: ./build/libs/mymod-all.jar
 ```
 
@@ -20,7 +20,7 @@
       MCMOD_ACCOUNT: username:password
   with:
       project_id: 7611
-      game_versions: 1.20.1:1.20.2 # 1.12.2:1.20.6 means version range
+      game_version: 1.20.1
       file: ./build/libs/mymod-all.jar
       platforms: java, bedrock
       loaders: forge, fabric, rift, liteloader, datapack, commandblock, overwrite, actionpack, sandbox, other, quilt, resourcepack, neoforge

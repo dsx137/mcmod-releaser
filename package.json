@@ -1,6 +1,6 @@
 {
   "name": "mcmod-releaser",
-  "version": "v1.1.0",
+  "version": "v1.1.1",
   "description": "Release versions to Mcmod with github actions!",
   "type": "module",
   "main": "dist/index.js",

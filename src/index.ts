@@ -53,7 +53,7 @@ export async function findFile(uuid: string, projectId: string, file: string) {
 export async function upload(
   uuid: string,
   projectId: string,
-  gameVersions: string[],
+  gameVersion: string,
   platforms: defs.Platform[],
   loaders: defs.Loader[],
   tags: defs.Tag[],
@@ -64,7 +64,7 @@ export async function upload(
 
     const form = new FormData();
     form.append("classID", projectId);
-    form.append("mcverList", gameVersions.join(","));
+    form.append("mcverList", gameVersion);
     form.append("platformList", platforms.map((it) => defs.PLATFORMS[it]).join(","));
     form.append("apiList", loaders.map((it) => defs.LOADERS[it]).join(","));
     form.append("tagList", tags.join(","));
@@ -95,15 +95,7 @@ export async function main() {
     return;
   }
 
-  await upload(
-    uuid,
-    values.projectId,
-    await values.gameVersions,
-    values.platforms,
-    values.loaders,
-    values.tags,
-    values.file
-  );
+  await upload(uuid, values.projectId, values.gameVersion, values.platforms, values.loaders, values.tags, values.file);
 }
 
 await main()
