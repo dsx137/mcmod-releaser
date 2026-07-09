@@ -8,7 +8,7 @@ export default nable.lazy({
       let username: string, password: string;
       try {
         [username, password] = nable.parsePair(it);
-      } catch (e) {
+      } catch {
         throw new Error("Invalid account");
       }
       return { username, password } as defs.Account;

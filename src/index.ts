@@ -44,7 +44,7 @@ export async function findFile(uuid: string, projectId: string, file: string) {
 
       const basename = path.basename(file);
       const isExist = files.includes(basename);
-      isExist ? core.info("File exist!") : core.info("File not exist!");
+      core.info(isExist ? "File exist!" : "File not exist!");
       return isExist;
     });
   });

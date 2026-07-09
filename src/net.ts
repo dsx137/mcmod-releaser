@@ -1,6 +1,4 @@
 import fetch from "node-fetch";
-import { HeadersInit, BodyInit } from "node-fetch";
-import * as values from "./values";
 
 export async function getMcVersions() {
   return await fetch("https://launchermeta.mojang.com/mc/game/version_manifest.json").then(async (res) => {
